@@ -11,6 +11,15 @@ pipeline {
             }
         }
 
+
+        stage('Seguridad') {
+            steps {
+                sh 'bandit -ll app.py'
+                sh 'pip-audit -r requirements.txt'
+            }
+            
+        }
+        
         stage('Test') {
             steps {
                 sh '.venv/bin/python -m pytest -q'
